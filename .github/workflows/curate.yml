@@ -1,0 +1,32 @@
+name: Curate an OSS Package
+
+permissions:
+  id-token: write
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Curate-OSS-Package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        id: setup-jfrog-cli
+        env:
+          JF_URL: ${{ vars.JF_URL }}
+        with:
+          oidc-provider-name: github-oidc-integration
+          oidc-audience: jfrog-github
+
+      - name: List Package Managers
+        id: list-package-manager
+        run: |
+          echo $(npm --version)
+          echo $(mvn --version)
+          echo $(pip --version)
+          echo $(docker --version)
+          
