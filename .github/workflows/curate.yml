@@ -60,6 +60,9 @@ jobs:
     needs: initialize
     if: ${{ needs.initialize.outputs.packageType == 'python' }}
     steps:
+      - name: Checkout
+      - uses: actions/checkout@v4
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -74,7 +77,7 @@ jobs:
       - name: Extract Package Request
         id: extract-package-request
         run: |
-          packageRequest=$(jq -c '.' < input/requested-packages.json)
+          packageRequest=$(jq -c '.' < ./input/requested-packages.json)
           echo "packageRequest=$packageRequest" >> $GITHUB_OUTPUT
 
       - name: Run Python Job
