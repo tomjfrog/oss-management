@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Curate-OSS-Package:
+  Initialize:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,16 +30,45 @@ jobs:
           echo $(pip --version)
           echo $(docker --version)
 
-      - name: Extract packageType and set output
+
+      - name: Extract Package Request
+        id: extract-package-request
+        run: |
+          packageRequest=$(jq . < input/requested-packages.json)
+          echo "packageRequest=$packageRequest >> $GITHUB_OUTPUT
+
+      - name: Extract and set packageType
         id: extract-package-type
         run: |
           packageType=$(jq -r '.packageType' < input/requested-packages.json)
           echo "packageType=$packageType" >> $GITHUB_OUTPUT
 
-      - name: Validate
-        id: validate
+      - name: Validate Package Request
+        id: validate-package-request
+        run: |
+          echo ${{ steps.extract-package-request.outputs.packageRequest }}
+
+      - name: Validate Package Type
+        id: validate-package-type
         run: |
           echo ${{ steps.extract-package-type.outputs.packageType }}
-      
 
-          
+  Curate-Python:
+    runs-on: ubuntu-latest
+    needs: extract_package_type
+    if: ${{ needs.extract-package-type.outputs.packageType == 'python' }}
+    run:
+      working-directory: ./pip
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+
+      - name: Run Python Job
+        run: |
+          echo "Running Python-specific job"
+          # Add your python-specific commands here
+          pip3 install -r 
+          python curate-python.py
