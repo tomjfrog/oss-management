@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Initialize:
+  initialize:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -53,9 +53,9 @@ jobs:
         run: |
           echo ${{ steps.extract-package-type.outputs.packageType }}
 
-  Curate-Python:
+  curate-python:
     runs-on: ubuntu-latest
-    needs: extract_package_type
+    needs: initialize
     if: ${{ needs.extract-package-type.outputs.packageType == 'python' }}
     run:
       working-directory: ./pip
