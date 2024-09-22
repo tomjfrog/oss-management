@@ -72,7 +72,7 @@ jobs:
 
       - name: Validate Inputs
         run: |
-          echo ${{ needs.initialize.outputs }}
+          echo ${{ needs.initialize.outputs.packageRequest }}
 
       - name: Run Python Job
         working-directory: ./pip
