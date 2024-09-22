@@ -58,8 +58,8 @@ jobs:
   curate-python:
     runs-on: ubuntu-latest
     needs: initialize
-#    env:
-#      res_curatepypi_payload: ${{ needs.initialize.outputs.packageRequest }}
+    env:
+      res_curatepypi_payload: ${{ needs.initialize.outputs.packageRequest }}
     if: ${{ needs.initialize.outputs.packageType == 'python' }}
     steps:
       - name: Checkout repository
