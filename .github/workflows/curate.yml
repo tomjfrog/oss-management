@@ -67,11 +67,15 @@ jobs:
 
       - name: Setup Python
         uses: actions/setup-python@v5
+        working-directory: ./pip
+        with:
+          python-version: 3.10
+        run:
 
       - name: Run Python Job
         working-directory: ./pip
         run: |
           echo "Running Python-specific job"
-          # Add your python-specific commands here
-          pip3 install -r requirements.txt
+          pip install -r requirements.txt
+          which python
           python curate-python.py
