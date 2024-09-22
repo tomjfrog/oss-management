@@ -34,8 +34,8 @@ jobs:
       - name: Extract Package Request
         id: extract-package-request
         run: |
-          packageRequest=$(jq . < input/requested-packages.json)
-          echo "packageRequest=$packageRequest >> $GITHUB_OUTPUT
+          packageRequest=$(jq -c '.' response.json)
+          echo "packageRequest=$packageRequest" >> $GITHUB_OUTPUT
 
       - name: Extract and set packageType
         id: extract-package-type
