@@ -71,10 +71,16 @@ jobs:
           res_curatepypi_payload=${{ needs.initialize.outputs.packageType }}
           echo "res_curatepypi_payload=$res_curatepypi_payload" >> $GITHUB_ENV
 
+      - name: Extract Package Request
+        id: extract-package-request
+        run: |
+          packageRequest=$(jq -c '.' < input/requested-packages.json)
+          echo "packageRequest=$packageRequest" >> $GITHUB_OUTPUT
+
       - name: Run Python Job
         working-directory: ./pip
         env:
-          res_curatepypi_payload: ${{ needs.initialize.outputs.packageType }}
+          res_curatepypi_payload: ${{ steps.extract-package-request.outputs.packageRequest }}
         run: |
           printenv | grep "res_curatepypi_payload"
           echo "Running Python-specific job"
