@@ -68,13 +68,13 @@ jobs:
       - name: Validate Inputs
         id: validate-inputs
         run: |
-          res_curatepypi_payload=${{ needs.initialize.outputs.packageRequest }}
+          res_curatepypi_payload=${{ needs.initialize.outputs.packageType }}
           echo "res_curatepypi_payload=$res_curatepypi_payload" >> $GITHUB_ENV
 
       - name: Run Python Job
         working-directory: ./pip
         env:
-          res_curatepypi_payload: ${{ needs.initialize.outputs.packageRequest }}
+          res_curatepypi_payload: ${{ needs.initialize.outputs.packageType }}
         run: |
           printenv | grep "res_curatepypi_payload"
           echo "Running Python-specific job"
