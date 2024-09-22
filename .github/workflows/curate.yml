@@ -25,11 +25,10 @@ jobs:
       - name: List Package Managers
         id: list-package-manager
         run: |
-          echo $(npm --version)
-          echo $(mvn --version)
-          echo $(pip --version)
-          echo $(docker --version)
-
+          echo NPM Version: $(npm --version)
+          echo Maven Version: $(mvn --version)
+          echo Pip Version: $(pip --version)
+          echo Docker Version: $(docker --version)
 
       - name: Extract Package Request
         id: extract-package-request
@@ -56,7 +55,7 @@ jobs:
   curate-python:
     runs-on: ubuntu-latest
     needs: initialize
-    if: ${{ needs.extract-package-type.outputs.packageType == 'python' }}
+    if: ${{ needs.initialize.outputs.packageType == 'python' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
