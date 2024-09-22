@@ -9,6 +9,9 @@ on:
 jobs:
   initialize:
     runs-on: ubuntu-latest
+    outputs:
+      packageType: ${{ steps.extract-package-type.outputs.packageType }}
+      packageRequest: ${{ steps.extract-package-request.outputs.packageRequest }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
