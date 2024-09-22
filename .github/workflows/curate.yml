@@ -58,8 +58,6 @@ jobs:
   curate-python:
     runs-on: ubuntu-latest
     needs: initialize
-    env:
-      res_curatepypi_payload: ${{ needs.initialize.outputs.packageRequest }}
     if: ${{ needs.initialize.outputs.packageType == 'python' }}
     steps:
       - name: Setup Python
@@ -68,15 +66,17 @@ jobs:
           python-version: 3.10.15
 
       - name: Validate Inputs
+        id: validate-inputs
         run: |
-          echo ${{ needs.initialize.outputs.packageRequest }}
+          res_curatepypi_payload=${{ needs.initialize.outputs.packageRequest }}
+          echo "res_curatepypi_payload=$res_curatepypi_payload" >> $GITHUB_ENV
 
       - name: Run Python Job
         working-directory: ./pip
         env:
           res_curatepypi_payload: ${{ needs.initialize.outputs.packageRequest }}
         run: |
-          printenv
+          printenv | grep "res_curatepypi_payload"
           echo "Running Python-specific job"
           pip install -r requirements.txt
           which python
