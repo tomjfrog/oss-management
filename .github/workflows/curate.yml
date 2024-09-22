@@ -67,7 +67,6 @@ jobs:
 
       - name: Setup Python
         uses: actions/setup-python@v5
-        working-directory: ./pip
         with:
           python-version: 3.10
 
