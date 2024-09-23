@@ -53,7 +53,7 @@ jobs:
       int_artifactory_user: 'tomj@jfrog.com'
       int_artifactory_apikey: ${{ secrets.JF_ACCESS_TOKEN }}
       int_artifactory_url: 'https://tomjfrog.jfrog.io'
-      local_repo_name: 'approved-python-local'
+      local_repo_name: 'scans-python-local'
       remote_repo_name: 'preapprove-python-remote'
 
     steps:
