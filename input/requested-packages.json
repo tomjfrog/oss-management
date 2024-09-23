@@ -2,7 +2,8 @@
   "packageType": "python",
   "packages": [
     "requests==2.32.3",
-    "requests==2.0.1"
+    "requests==2.0.1",
+    "PyYAML==5.1"
   ],
   "requestor": "tomj@jfrog.com",
   "applicationId": "1234"
