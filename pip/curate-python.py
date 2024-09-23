@@ -105,7 +105,7 @@ def main():
     tmp_login_data['arti_url'] = os.environ['int_artifactory_url']
     tmp_login_data['local_repo'] = os.environ['local_repo_name']
     tmp_login_data['remote_repo'] = os.environ['remote_repo_name']
-    tmp_login_data['pypi_index_url'] = "{}//{}:{}@{}/artifactory/api/pypi/{}/simple".format(
+    tmp_login_data['pypi_index_url'] = "{}//{}:{}@{}/api/pypi/{}/simple".format(
         str(tmp_login_data['arti_url'].split('/')[0]),
         tmp_login_data['user'],
         tmp_login_data['apikey'],
