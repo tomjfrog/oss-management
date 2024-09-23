@@ -51,7 +51,7 @@ jobs:
     if: ${{ needs.initialize.outputs.packageType == 'python' }}
     env:
       int_artifactory_user: 'tomj@jfrog.com'
-      int_artifactory_apikey: ${{ needs.initialize.outputs.accessToken }}
+      int_artifactory_apikey: ${{ secrets.JF_ACCESS_TOKEN }}
       int_artifactory_url: 'https://tomjfrog.jfrog.io'
       local_repo_name: 'approved-python-local'
       remote_repo_name: 'preapprove-python-remote'
