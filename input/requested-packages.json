@@ -1,7 +1,8 @@
 {
   "packageType": "python",
-  "packageName": "requests",
-  "packageVersion": "2.32.3",
+  "packages": [
+    {"requests": "2.32.3"}
+  ],
   "requestor": "tomj@jfrog.com",
   "applicationId": "1234"
 }

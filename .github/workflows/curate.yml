@@ -12,6 +12,7 @@ jobs:
     outputs:
       packageType: ${{ steps.extract-package-type.outputs.packageType }}
       packageRequest: ${{ steps.extract-package-request.outputs.packageRequest }}
+      accessToken: ${{ steps.setup-jfrog-cli.outputs.oidc-token }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,22 +34,11 @@ jobs:
           echo Pip Version: $(pip --version)
           echo Docker Version: $(docker --version)
 
-      - name: Extract Package Request
-        id: extract-package-request
-        run: |
-          packageRequest=$(jq -c '.' < input/requested-packages.json)
-          echo "packageRequest=$packageRequest" >> $GITHUB_OUTPUT
-
       - name: Extract and set packageType
         id: extract-package-type
         run: |
           packageType=$(jq -r '.packageType' < input/requested-packages.json)
           echo "packageType=$packageType" >> $GITHUB_OUTPUT
-
-      - name: Validate Package Request
-        id: validate-package-request
-        run: |
-          echo ${{ steps.extract-package-request.outputs.packageRequest }}
 
       - name: Validate Package Type
         id: validate-package-type
@@ -59,8 +49,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: initialize
     if: ${{ needs.initialize.outputs.packageType == 'python' }}
-    steps:
+    env:
+      int_artifactory_user: 'tomj@jfrog.com'
+      int_artifactory_apikey: ${{ needs.initialize.outputs.accessToken }}
+      int_artifactory_url: 'https://tomjfrog.jfrog.io'
+      local_repo_name: 'approved-python-local'
+      remote_repo_name: 'preapprove-python-remote'
 
+    steps:
       - name: Checkout
         uses: actions/checkout@v4
 
