@@ -82,7 +82,8 @@ class PythonPackagePuller:
             #       failed.  This isn't required for this example as the failed
             #       curation will be referred to manual review.
             self.logger.warning("Failed to install package: %s", self.package_line)
-            self.logger.warning("  Error: %s", pip_output.stderr.decode())
+            pip_error = pip_output.stderr.decode("utf-8")
+            self.logger.warning("  Error: %s", pip_error)
             return
         # Install succeeded, so process the output
         self.success = True
@@ -175,6 +176,7 @@ def main():
         logging.warning("Failed to Curate:")
         for item in tmp_failures:
             logging.warning("  %s", item)
+
 
 if __name__ == '__main__':
     main()

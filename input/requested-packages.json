@@ -1,9 +1,7 @@
 {
-  "packageType": "python",
+  "packageType": "maven",
   "packages": [
-    "requests==2.32.3",
-    "requests==2.0.1",
-    "PyYAML==5.1"
+    "org.apache.tinkerpop:gremlin-shaded:jar:3.5.3:compile"
   ],
   "requestor": "tomj@jfrog.com",
   "applicationId": "1234"

@@ -82,8 +82,36 @@ jobs:
         env:
           res_curatepypi_payload: ${{ steps.extract-package-request.outputs.packageRequest }}
         run: |
-          printenv | grep "res_curatepypi_payload"
           echo "Running Python-specific job"
-          pip install -r requirements.txt
-          which python
           python curate-python.py
+
+  curate-maven:
+    runs-on: ubuntu-latest
+    needs: initialize
+    if: ${{ needs.initialize.outputs.packageType == 'maven' }}
+    env:
+      int_artifactory_user: 'tomj@jfrog.com'
+      int_artifactory_apikey: ${{ secrets.JF_ACCESS_TOKEN }}
+      int_artifactory_url: 'https://tomjfrog.jfrog.io/artifactory'
+      local_repo_name: 'scans-maven-local'
+      remote_repo_name: 'preapprove-maven-remote'
+
+    steps:
+      - name: Validate Inputs
+        id: validate-inputs
+        run: |
+          res_curatepypi_payload=${{ needs.initialize.outputs.packageType }}
+          echo "res_curatepypi_payload=$res_curatepypi_payload" >> $GITHUB_ENV
+
+      - name: Extract Package Request
+        id: extract-package-request
+        run: |
+          packageRequest=$(jq -c '.' < ./input/requested-packages.json)
+          echo "packageRequest=$packageRequest" >> $GITHUB_OUTPUT
+      - name: Run Python Job
+        working-directory: ./maven
+        env:
+          res_curatepypi_payload: ${{ steps.extract-package-request.outputs.packageRequest }}
+        run: |
+          echo "Running Python-specific job"
+          python curate-maven.py
