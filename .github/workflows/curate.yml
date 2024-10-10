@@ -114,7 +114,7 @@ jobs:
       - name: Run Python Job
         working-directory: ./maven
         env:
-          res_curatepypi_payload: ${{ steps.extract-package-request.outputs.packageRequest }}
+          res_curatemaven_payload: ${{ steps.extract-package-request.outputs.packageRequest }}
         run: |
-          echo "Running Python-specific job"
+          echo "Running Maven curation job"
           python curate-maven.py
