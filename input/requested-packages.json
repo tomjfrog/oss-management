@@ -1,7 +1,7 @@
 {
   "packageType": "maven",
-  "packages": [
-    "org.apache.tinkerpop:gremlin-shaded:jar:3.5.3:compile"
+  "pomdata": [
+    "b3JnLmFwYWNoZS50aW5rZXJwb3A6Z3JlbWxpbi1zaGFkZWQ6amFyOjMuNS4zOmNvbXBpbGUK"
   ],
   "requestor": "tomj@jfrog.com",
   "applicationId": "1234"
