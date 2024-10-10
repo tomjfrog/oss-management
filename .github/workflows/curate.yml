@@ -100,8 +100,8 @@ jobs:
       - name: Validate Inputs
         id: validate-inputs
         run: |
-          res_curatepypi_payload=${{ needs.initialize.outputs.packageType }}
-          echo "res_curatepypi_payload=$res_curatepypi_payload" >> $GITHUB_ENV
+          res_curatemaven_payload=${{ needs.initialize.outputs.packageType }}
+          echo "res_curatemaven_payload=$res_curatemaven_payload" >> $GITHUB_ENV
 
       - name: Extract Package Request
         id: extract-package-request
