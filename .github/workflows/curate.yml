@@ -97,6 +97,9 @@ jobs:
       remote_repo_name: 'preapprove-maven-remote'
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Validate Inputs
         id: validate-inputs
         run: |
