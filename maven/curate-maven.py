@@ -9,8 +9,8 @@ import subprocess
 import sys
 
 ### GLOBALS ###
-REMOTE_REPO_NAME = "demo-maven"
-LOCAL_REPO_NAME = "demo-maven-local"
+REMOTE_REPO_NAME = "preapprove-maven-remote"
+LOCAL_REPO_NAME = "scans-maven-local"
 
 
 ### FUNCTIONS ###
