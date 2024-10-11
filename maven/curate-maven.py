@@ -53,7 +53,7 @@ def main():
     logging.debug("  tmp_payload_dict: %s", tmp_payload_dict)
     tmp_pomxml_base64 = tmp_payload_dict['pomdata']
     logging.debug("  tmp_pomxml_base64: %s", tmp_pomxml_base64)
-    tmp_pomxml_str = base64.b64decode(b'tmp_pomxml_base64', validate=True)
+    tmp_pomxml_str = base64.b64decode(tmp_pomxml_base64, validate=True)
     logging.debug("  tmp_pomxml_str: %s", tmp_pomxml_str)
     with open('pom.xml', 'w', encoding='utf-8') as tmp_pomxml_file:
         tmp_pomxml_file.write(tmp_pomxml_str.decode())
