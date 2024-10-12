@@ -102,7 +102,8 @@ class DockerImagePuller:
         self.logger.debug("Pulling the manifest for image: %s", self.docker_image)
         self.logger.debug("tmp_image_tag: %s", self.image_tag)
         self.logger.debug("tmp_image_split: %s", self.image_split)
-        tmp_image_arti_name = "{}/{}/{}/list.manifest.json".format(
+        tmp_image_arti_name = "{}/{}/{}/{}/list.manifest.json".format(
+            REMOTE_REPO_NAME,
             self.image_split[0],
             self.image_split[1],
             self.image_tag[1]
