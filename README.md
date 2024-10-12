@@ -16,3 +16,4 @@ Needs to have an *entire* `pom.xml` file base64 encoded and added to the `pomxml
 ```
 ## TODOs
 * Check for the presence of the requested library in the `scans-<packagetype>-local` repo in target Artifcatory instance
+* Send Scan Violations Results to a Webhook, Write to a JSON and Publish to an Artifactory Generic Repo, or something else
