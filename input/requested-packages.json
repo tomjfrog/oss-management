@@ -1,5 +1,5 @@
 {
-  "packageType": "maven",
+  "packageType": "docker",
    "images": [
     "library/alpine:latest",
     "library/python:3.11-alpine",
