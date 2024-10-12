@@ -79,7 +79,7 @@ class DockerImagePuller:
         # FIXME: Convert this to urllib or similar
         self.logger.debug("Get artifact: %s", input_url)
         curl_cmd = "curl -f -u{}:{} {}/{}".format(
-            self.login_data['user'], self.login_data['apikey'], self.login_data['arti_url'] + '/api/docker', input_url
+            self.login_data['user'], self.login_data['apikey'], self.login_data['arti_url'], input_url
         )
         curl_output = subprocess.run(curl_cmd.split(' '), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         self.logger.debug("  curl_output: %s", curl_output)
@@ -103,10 +103,7 @@ class DockerImagePuller:
         self.logger.debug("tmp_image_tag: %s", self.image_tag)
         self.logger.debug("tmp_image_split: %s", self.image_split)
         tmp_image_arti_name = "{}/{}/{}/{}/list.manifest.json".format(
-            REMOTE_REPO_NAME,
-            self.image_split[0],
-            self.image_split[1],
-            self.image_tag[1]
+            self.image_split[1], self.image_split[2], self.image_split[3], self.image_tag[1]
         )
         tmp_curl1_output = self._arti_curl_get(tmp_image_arti_name)
         self.logger.debug("  tmp_curl1_output: %s", tmp_curl1_output)
