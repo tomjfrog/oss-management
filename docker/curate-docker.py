@@ -382,8 +382,8 @@ def main():
     tmp_login_data['local_repo'] = os.environ['local_repo_name']
     tmp_login_data['remote_repo'] = os.environ['remote_repo_name']
     tmp_login_data['docker_url'] = str(tmp_login_data['arti_url'].split('/')[2])
-    tmp_login_data['docker_local_url'] = "{}.{}".format(tmp_login_data['local_repo'], tmp_login_data['docker_url'])
-    tmp_login_data['docker_remote_url'] = "{}.{}".format(tmp_login_data['remote_repo'], tmp_login_data['docker_url'])
+    tmp_login_data['docker_local_url'] = "{}/{}".format(tmp_login_data['docker_url'], tmp_login_data['local_repo'])
+    tmp_login_data['docker_remote_url'] = "{}/{}".format(tmp_login_data['docker_url'], tmp_login_data['remote_repo'])
 
     docker_login(tmp_login_data)
 
