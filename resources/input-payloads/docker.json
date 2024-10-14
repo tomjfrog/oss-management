@@ -1,6 +1,6 @@
 {
   "packageType": "maven",
-   "images": [
+  "images": [
     "library/alpine:latest",
     "library/python:3.11-alpine",
     "library/python:3.9-alpine",
