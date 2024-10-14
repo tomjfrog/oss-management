@@ -143,8 +143,8 @@ jobs:
       - name: Validate Inputs
         id: validate-inputs
         run: |
-          res_curatedocker_payload=${{ needs.initialize.outputs.packageType }}
-          echo "res_curatedocker_payload=$res_curatedocker_payload" >> $GITHUB_ENV
+          res_gated_docker_webhook_payload=${{ needs.initialize.outputs.packageType }}
+          echo "res_gated_docker_webhook_payload=$res_gated_docker_webhook_payload" >> $GITHUB_ENV
 
       - name: Extract Package Request
         id: extract-package-request
@@ -155,7 +155,7 @@ jobs:
       - name: Run Python Job
         working-directory: ./docker
         env:
-          res_curatedocker_payload: ${{ steps.extract-package-request.outputs.packageRequest }}
+          res_gated_docker_webhook_payload: ${{ steps.extract-package-request.outputs.packageRequest }}
         run: |
           echo "Running Docker-specific job"
           python curate-docker.py
